@@ -28,4 +28,4 @@ $ pip install -r requiremnets.txt
 ```bash
 $ cp .env.example .env
 ```
-
+## Postman(optional)
