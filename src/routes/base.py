@@ -12,7 +12,7 @@ base_router=APIRouter(
 @base_router.get("/")
 async def base_info():
     settings = settings_loader()
-    app_name = settings.app_name.value
-    app_version = settings.app_version.value
+    app_name = settings.app_name
+    app_version = settings.app_version
     return {"app_name": app_name, 
             "app_version": app_version}
