@@ -18,3 +18,14 @@ $ conda create -n RAG python=3.8
 ```bash
 $ conda activate RAG
 ```
+## installation
+
+### install the required packages
+```bash
+$ pip install -r requiremnets.txt
+```
+### setup the envirnoment variable
+```bash
+$ cp .env.example .env
+```
+
