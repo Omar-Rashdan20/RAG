@@ -1,6 +1,8 @@
 from fastapi import FastAPI, APIRouter
 import os
 from dotenv import load_dotenv
+from helpers.config import settings_loader
+
 load_dotenv(".env")
 
 base_router=APIRouter(
@@ -9,7 +11,8 @@ base_router=APIRouter(
 )
 @base_router.get("/")
 async def base_info():
-    app_name = os.getenv("app_name")
-    app_version = os.getenv("app_version")
+    settings = settings_loader()
+    app_name = settings.app_name.value
+    app_version = settings.app_version.value
     return {"app_name": app_name, 
             "app_version": app_version}
