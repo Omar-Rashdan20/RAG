@@ -1,4 +1,5 @@
-from fastapi import FastAPI, Depends,APIRouter,UploadFile
+from fastapi import FastAPI, Depends,APIRouter,UploadFile,status
+from fastapi.responses import JSONResponse
 import os
 from dotenv import load_dotenv
 from helpers.config import settings_loader,Settings
@@ -13,5 +14,10 @@ async def upload_data(project_id: str, file: UploadFile,
                        settings:Settings=Depends(settings_loader)):
 
     #validate file type and size
-    is_valid = Data_controller().validate_file(file)
-    return is_valid
+    is_valid, message = Data_controller().validate_file(file)
+    if not is_valid:
+        return JSONResponse(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            content={"message": message}
+        )
+    return is_valid, {"message": "success upload"}
