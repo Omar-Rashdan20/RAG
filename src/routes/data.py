@@ -40,7 +40,6 @@ async def upload_data(project_id: str, file: UploadFile,
         )
     return JSONResponse(
         content={"message": ResponseEnum.SUCCESS.value, 
-                 "file_id": file_id}
-    )   
+                 "file_id": file_id})   
 
       
