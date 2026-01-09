@@ -24,7 +24,8 @@ async def upload_data(project_id: str, file: UploadFile,
    # return is_valid, {"message": "success upload"}
     #get project directory
     project_path = Project_controller().get_project_dir(project_id=project_id)
-    file_location = os.path.join(project_path, file.filename)
+    file_location = Data_controller().genertate_unique_filename(
+        original_filename=file.filename,project_id=project_id)
     async with aiofiles.open(file_location, 'wb') as out_file:
       while content := await file.read(settings.chunk_size):  # Read file in chunks
             await out_file.write(content)  # Write chunk to the destination file

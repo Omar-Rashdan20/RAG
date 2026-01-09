@@ -1,0 +1,17 @@
+achievement:                                                       ❌✔️
+1)sql-pyhton(w3-shcool):✔️                             
+2)IBM RAG and agentic Ai:✔️
+3)finetuning qlora,lora: ✔️               
+4)Microsoft Azure Course:
+5)you tube mini-rag:
+6)article:
+7)road map:
+--------------------------------------
+Data Engineer
+--------------------------------------
+optional:
+you tube video:
+n8n Kareem:
+statistics:
+
+
