@@ -1,4 +1,4 @@
 from helpers.config import settings_loader#,Settings
-class BaseController:
+class Base_Controller:
     def __init__(self):
         self.settings = settings_loader()
