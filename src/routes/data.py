@@ -5,7 +5,7 @@ from helpers.config import settings_loader,Settings
 from controllers import Data_controller
 
 data_router=APIRouter(
-    prefix="/rag/v01/upload",
+    prefix="/rag/v01/upload/{project_id}",
     tags=["rag_v01","data_upload"],
 )
 @data_router.post("/upload/{project_id}")
