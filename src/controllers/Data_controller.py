@@ -26,7 +26,7 @@ class Data_controller(Base_controller):
         while os.path.exists(new_filepath):
             random_file_name=self.generate_random_string(8)
             new_filepath=os.path.join(project_path,f"{random_file_name}_{cleaned_filename}")
-        return new_filepath+random_file_name+"_"+cleaned_filename 
+        return new_filepath,random_file_name+"_"+cleaned_filename 
     
     def get_cleaned_filename(self,original_filename:str):
         #remove special characters,except for underscores,dots,and hyphens
