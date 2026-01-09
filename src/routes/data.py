@@ -44,22 +44,27 @@ async def upload_data(project_id: str, file: UploadFile,
         content={"message": ResponseEnum.SUCCESS.value, 
                  "file_id": file_id})   
 @data_router.post("/process/{project_id}")
-async def process_endpoint(project_id:str,process_request:ProcessRequest):
-   file_id=process_request.file_id
-   chunk_size=process_request.chunk_size
-   overlap=process_request.overlap  
-   process_controller=Process_controller(project_id=project_id)
-   file_content=process_controller.get_file_content(file_id=file_id)   
-   file_cunks=process_controller.process_file_content(
+async def process_endpoint(
+    project_id: str,
+    process_request: ProcessRequest
+):
+    process_controller = Process_controller(project_id=project_id)
+
+    file_content = process_controller.get_file_content(
+        file_id=process_request.file_id
+    )
+
+    file_chunks = process_controller.process_file_content(
         file_content=file_content,
-        file_id=file_id,
-        chunk_size=chunk_size,
-        overlap=overlap)       
-   if file_cunks==None or len(file_cunks)==0:
+        file_id=process_request.file_id,
+        chunk_size=process_request.chunk_size,
+        overlap=process_request.overlap
+    )
+
+    if not file_chunks:
         return JSONResponse(
             status_code=status.HTTP_400_BAD_REQUEST,
             content={"message": ResponseEnum.File_empty.value}
         )
-   return file_cunks
 
-   
+    return file_chunks
