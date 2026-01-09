@@ -55,9 +55,11 @@ async def process_endpoint(project_id:str,process_request:ProcessRequest):
         file_id=file_id,
         chunk_size=chunk_size,
         overlap=overlap)       
-    if file_cunks==None or len(file_cunks)==0:
+   if file_cunks==None or len(file_cunks)==0:
         return JSONResponse(
             status_code=status.HTTP_400_BAD_REQUEST,
             content={"message": ResponseEnum.File_empty.value}
         )
+   return file_cunks
+
    
