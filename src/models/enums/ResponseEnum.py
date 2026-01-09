@@ -17,5 +17,8 @@ class ResponseEnum(str, Enum):
     NOT_IMPLEMENTED = "Not implemented"
     SERVICE_UNAVAILABLE = "Service unavailable"
     DEPENDENCY_ERROR = "Dependency error occurred"
+    FILE_PROCESSING_FAILED = "File processing failed"   
+    File_empty = "File is empty"
     
+
     

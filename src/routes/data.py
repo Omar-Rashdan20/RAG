@@ -7,6 +7,8 @@ from controllers import Data_controller,Project_controller
 import aiofiles
 import logging
 from models.enums import ResponseEnum
+from routes.schemes.data import ProcessRequest
+from controllers import Process_controller
 logger=logging.getLogger("uvicorn.error")
 data_router=APIRouter(
     prefix="/rag/v01/upload",
@@ -41,5 +43,21 @@ async def upload_data(project_id: str, file: UploadFile,
     return JSONResponse(
         content={"message": ResponseEnum.SUCCESS.value, 
                  "file_id": file_id})   
-
-      
+@data_router.post("/process/{project_id}")
+async def process_endpoint(project_id:str,process_request:ProcessRequest):
+   file_id=process_request.file_id
+   chunk_size=process_request.chunk_size
+   overlap=process_request.overlap  
+   process_controller=Process_controller(project_id=project_id)
+   file_content=process_controller.get_file_content(file_id=file_id)   
+   file_cunks=process_controller.process_file_content(
+        file_content=file_content,
+        file_id=file_id,
+        chunk_size=chunk_size,
+        overlap=overlap)       
+    if file_cunks==None or len(file_cunks)==0:
+        return JSONResponse(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            content={"message": ResponseEnum.File_empty.value}
+        )
+   
