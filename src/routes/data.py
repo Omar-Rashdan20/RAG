@@ -5,7 +5,8 @@ from dotenv import load_dotenv
 from helpers.config import settings_loader,Settings
 from controllers import Data_controller,Project_controller
 import aiofiles
-
+import logging
+logger=logging.getLogger("uvicorn.error")
 data_router=APIRouter(
     prefix="/rag/v01/upload",
     tags=["rag_v01","data_upload"],
@@ -26,10 +27,14 @@ async def upload_data(project_id: str, file: UploadFile,
     project_path = Project_controller().get_project_dir(project_id=project_id)
     file_location = Data_controller().genertate_unique_filename(
         original_filename=file.filename,project_id=project_id)
-    async with aiofiles.open(file_location, 'wb') as out_file:
+    try:
+     async with aiofiles.open(file_location, 'wb') as out_file:
       while content := await file.read(settings.chunk_size):  # Read file in chunks
             await out_file.write(content)  # Write chunk to the destination file
-            return JSONResponse(
-                status_code=status.HTTP_200_OK
-                ,content={"message": "File uploaded successfully"})
+    except Exception as e:
+        logger.error(f"Error uploading file: {str(e)}")
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"message": f"An error occurred while uploading the file: {str(e)}"}
+        )
       
