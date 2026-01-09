@@ -5,6 +5,7 @@ class Settings(BaseSettings):
     api_key: str
     file_type: list
     max_file_size: int
+    chunk_size: int
     class Config:
         env_file = ".env"
         

@@ -29,3 +29,10 @@ $ pip install -r requiremnets.txt
 $ cp .env.example .env
 ```
 ## Postman(optional)
+
+## Fast api call
+```bash
+uvicorn main:app --reload --host 0.0.0.0 --port 5000
+```
+
+
