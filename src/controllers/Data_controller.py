@@ -1,4 +1,5 @@
 from fastapi import UploadFile
+from .Base_controller import Base_controller
 class Date_controller(Base_controller):
     def __init__(self):
         super().__init__()
