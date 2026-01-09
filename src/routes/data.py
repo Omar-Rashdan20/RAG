@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends,APIRouter,UploadFile
 import os
 from dotenv import load_dotenv
 from helpers.config import settings_loader,Settings
-from controllers import Date_controller
+from controllers import Data_controller
 
 data_router=APIRouter(
     prefix="/rag/v01/upload",
